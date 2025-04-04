@@ -2,6 +2,8 @@
 
 import { API_URL } from "@/constants"
 import { authHeathers } from "@/helpers/authHeaders";
+import { revalidateTag } from "next/cache";
+import { redirect } from "next/navigation";
 
 export default async function deleteLocation(formData: FormData) {
     const locationId = formData.get("deleteValue")
@@ -12,4 +14,6 @@ export default async function deleteLocation(formData: FormData) {
             ...authHeathers(),
         }
     })
+    revalidateTag("dashboard:locations")
+    redirect(`/dashboard`)
 }
