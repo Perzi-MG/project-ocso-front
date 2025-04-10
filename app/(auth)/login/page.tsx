@@ -12,14 +12,17 @@ export default function LoginPage() {
         e.preventDefault()
         const formData = new FormData(e.target);
         let authData: any = {}
-        authData.userEmail = formData.get("UserEmail");
-        authData.userPassword = formData.get("UserPassword");
+        authData.userEmail = formData.get("userEmail");
+        authData.userPassword = formData.get("userPassword");
         try {
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(authData),
-                credentials: "include",
-            })
+                credentials: 'include',
+            });
             if (response.status === 201) router.push('/dashboard')
             setSubmitting(false);
         } catch (e) {
@@ -31,8 +34,8 @@ export default function LoginPage() {
         <form className="bg-orange-500 px-10 py-2 rounded-md" onSubmit={handleSubmit}>
             <p className="text-2xl my-4 text-white">Iniciar Sesión<span></span></p>
             <div className="flex flex-col gap-2 my-4 items-center">
-                <Input label="Email" name="UserEmail" type="email" isRequired={true} size="sm" />
-                <Input label="Contraseña" name="UserPassword" type="password" isRequired={true} size="sm" />
+                <Input label="Email" name="userEmail" type="email" isRequired={true} size="sm" />
+                <Input label="Contraseña" name="userPassword" type="password" isRequired={true} size="sm" />
             </div>
             <div className="flex flex-col items-center gap-2">
                 <Button color="primary" type="submit" disabled={submitting}>{submitting ? "Enviando..." : "Iniciar Sesión"}</Button>
