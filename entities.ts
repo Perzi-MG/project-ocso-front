@@ -22,9 +22,9 @@ export interface Employee{
 export interface Manager{
     managerId: string;
     managerFullName: string;
-    managerSalary: number;
     managerEmail: string;
+    managerSalary: number;
     managerPhoneNumber: string;
-    location: Location;
+    location?: Location;
     user: any
 }
