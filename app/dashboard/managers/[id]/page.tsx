@@ -27,5 +27,6 @@ export default async function ManagerPage({
                 <DeleteManagerButton managerId={data.managerId} />
             </div>
         </div>
+        
     )
 }
