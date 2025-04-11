@@ -4,18 +4,18 @@ import { API_URL } from "@/constants";
 import { authHeathers } from "@/helpers/authHeaders";
 import { revalidateTag } from "next/cache";
 
-export default async function createManager(formData: FormData) {
-    let manager: any = {};
+export default async function createProvider(formData: FormData) {
+    let provider: any = {};
     for (const key of Array.from(formData.keys())) {
-        manager[key] = formData.get(key);
+        provider[key] = formData.get(key);
     }
-    const response = await fetch(`${API_URL}/managers`, {
+    const response = await fetch(`${API_URL}/providers`, {
         method: "POST",
-        body: JSON.stringify(manager),
+        body: JSON.stringify(provider),
         headers: {
             ...authHeathers(),
             'content-type': "application/json"
         },
     })
-    if(response.status === 201) revalidateTag("dashboard:managers")
+    if(response.status === 201) revalidateTag("dashboard:providers")
 }
