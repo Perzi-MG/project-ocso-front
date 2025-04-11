@@ -7,6 +7,7 @@ import Link from "next/link";
 export default async function LocationCard({ store }: { store: string | string[] | undefined }) {
     if (!store) return null;
     const response = await fetch(`${API_URL}/locations/${store}`, {
+        method: "GET",
         headers: {
             ...authHeathers()
         },

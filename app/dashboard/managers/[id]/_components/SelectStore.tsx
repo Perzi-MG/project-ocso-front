@@ -3,14 +3,14 @@
 import { Location } from "@/entities"
 import { Select, SelectItem } from "@heroui/react"
 
-export default function SelectStore({ stores, defaultStore }: { stores: Location[], defaultStore: number | undefined}) {
+export default function SelectStore({ stores, defaultStore }: { stores: Location[], defaultStore: number}) {
     const disabledStores = stores.map((store: Location) => {
-        if(store.manager !== undefined) {
+        if(store.manager !== undefined && store.locationId !== defaultStore) {
             return String(store.locationId)
         }
     }).filter((storeId) => storeId !== undefined)
     return (
-        <Select defaultSelectedKeys={defaultStore ? [defaultStore] : undefined} disabledKeys={disabledStores}>
+        <Select label="Tienda" name = "location" defaultSelectedKeys={defaultStore ? [defaultStore] : undefined} disabledKeys={disabledStores}>
             {
                 stores.map((store: Location) => (
                     <SelectItem key={store.locationId}>
