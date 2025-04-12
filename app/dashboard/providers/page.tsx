@@ -11,6 +11,9 @@ const ProviderPage = async () => {
     const response = await fetch(`${API_URL}/providers`, {
         headers: {
             ...authHeathers()
+        },
+        next: {
+            tags: ["dashboard:providers"]
         }
     })
     const providers: Provider[] = await response.json()

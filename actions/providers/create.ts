@@ -15,7 +15,7 @@ export default async function createProvider(formData: FormData) {
         headers: {
             ...authHeathers(),
             'content-type': "application/json"
-        },
+        }
     })
     if(response.status === 201) revalidateTag("dashboard:providers")
 }
