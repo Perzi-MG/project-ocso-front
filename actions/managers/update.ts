@@ -22,7 +22,6 @@ export default async function updateManager(managerId: string, formData: FormDat
         },
     })
     const data = await response.json()
-    console.log(data)
     if (response.status === 200) {
         revalidateTag("dashboard:managers")
         revalidateTag(`dashboard:managers:${managerId}`)
