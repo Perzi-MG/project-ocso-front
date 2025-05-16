@@ -1,26 +1,26 @@
-'use client'
+"use client"
 
-import registerEmployee from "@/actions/users/register-employee";
-import { Employee } from "@/entities";
-import { Button, Input } from "@heroui/react";
+import { User } from "@/entities";
 import { useState } from "react";
+import { Input, Button } from "@heroui/react";
 import { generate } from "generate-password";
 import { LuEye } from "react-icons/lu";
+import updateUser from "@/actions/users/update";
 
-export default function FormCreateUserEmployee({ employee }: { employee: Employee }) {
+export default function FormUpdateUser({ user }: { user: User }) {
+    const {userId} = user;
     const [password, setPassword] = useState<string>();
     const [visible, setVisible] = useState<boolean>(false);
-    const { employeeId } = employee;
-    const registerEmployeeById = registerEmployee.bind(null, employeeId)
+    const updateUserById = updateUser.bind(null, userId)
     return (
-        <form action={registerEmployeeById} className="py-10 flex flex-col gap-2">
-            <h1 className="text-white text-xl text-center">Crear Usuario</h1>
-            <Input name="userEmail" label="Correo de Cuenta" />
+        <form action={updateUserById} className="py-10 flex flex-col gap-2">
+            <h1 className="text-white text-xl text-center">Actualizar Usuario</h1>
+            <Input defaultValue={user.userEmail} name="userEmail" label="Correo de Cuenta" />
             <Input value={password} type={visible ? "text" : "password"}
                 name="userPassword"
                 label="Contraseña"
                 endContent={<button type="button" onMouseUp={() => setVisible(false)} onMouseDown={() => setVisible(true)}>
-                    <LuEye size={25}/>
+                    <LuEye size={25} />
                 </button>} />
             <Button color="danger" onPress={() => {
                 setPassword(generate({
@@ -30,7 +30,7 @@ export default function FormCreateUserEmployee({ employee }: { employee: Employe
                 Generar Contraseña
             </Button>
             <Button type="submit" color="primary">
-                Crear Usuario
+                Actualizar Usuario
             </Button>
         </form>
     )
